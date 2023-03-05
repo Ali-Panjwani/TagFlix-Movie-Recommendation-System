@@ -8,7 +8,27 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
+import java.io.File;
 
 
 public class MovieParser {
+
+    public MovieParser() {
+
+    }
+
+    public File[] filereader(String filepath) {
+        try {
+            File folder = new File(filepath);
+            File[] files = folder.listFiles();
+
+            return files;
+        } catch(SecurityException e) {
+            System.out.println("Security exception occurred: " + e.getMessage());
+        } catch (NullPointerException e) {
+            System.out.println("Folder does not exist or is not a directory.");
+        }
+        return null;
+    }
+
 }
