@@ -6,6 +6,7 @@ public class MovieEntry implements Comparable<MovieEntry>{
     private String title;
     private ArrayList<String> genre;
     private int rating;
+    private int rating_count;
     private ArrayList<String> tags;
     private String imdbId;
     private String tmdbId;
@@ -42,8 +43,15 @@ public class MovieEntry implements Comparable<MovieEntry>{
         return rating;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public void setRating(int new_rating) {
+        rating_count++;
+
+        int prev_rating = rating;
+        this.rating = ((rating * (rating_count-1)) + new_rating) / rating_count;
+    }
+
+    public int getrating_count() {
+        return rating_count;
     }
 
     public ArrayList<String> getTags() {
@@ -84,6 +92,5 @@ public class MovieEntry implements Comparable<MovieEntry>{
         }
     }
 
-
-
 }
+
