@@ -17,7 +17,7 @@ public interface CsvReader {
 
 }
 
-abstract class MoviesReader implements CsvReader{
+class MoviesReader implements CsvReader{
 
     @Override
     public void CsvReader(String filepath) {
@@ -37,21 +37,21 @@ abstract class MoviesReader implements CsvReader{
     }
 }
 
-abstract class LinksReader implements CsvReader{
+class LinksReader implements CsvReader{
     @Override
     public void CsvReader(String filepath) {
 
     }
 }
 
-abstract class RatingsReader implements CsvReader{
+class RatingsReader implements CsvReader{
     @Override
     public void CsvReader(String filepath) {
 
     }
 }
 
-abstract class TagsReader implements CsvReader{
+class TagsReader implements CsvReader{
     @Override
     public void CsvReader(String filepath) {
 
