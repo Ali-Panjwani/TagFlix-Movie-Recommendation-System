@@ -10,16 +10,15 @@ import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 import java.io.File;
 
-
 public class MovieParser {
 
     public MovieParser() {
 
     }
 
-    public File[] filereader(String filepath) {
+    public File[] filereader(String folderpath) {
         try {
-            File folder = new File(filepath);
+            File folder = new File(folderpath);
             File[] files = folder.listFiles();
 
             return files;
