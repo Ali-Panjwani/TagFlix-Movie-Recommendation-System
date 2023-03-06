@@ -27,8 +27,12 @@ public class Movies {
         return genre;
     }
 
-    public void setGenre(ArrayList<String> genre) {
-        this.genre = genre;
+    public void setGenre(String[] genre_array) {
+
+        for(int i = 0; i <= genre_array.length; i++) {
+            genre.add(genre_array[i]);
+        }
+
     }
 
     public Movies() {
