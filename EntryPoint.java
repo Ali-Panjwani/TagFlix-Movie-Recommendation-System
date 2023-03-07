@@ -3,9 +3,9 @@ import java.util.Map;
 
 public class EntryPoint {
     public static void main(String[] args) {
-        LinksReader linksReader = new LinksReader();
-        linksReader.CsvReader("data\\links.csv");
-        HashMap<String, Links> link = linksReader.getLinksMap();
+        CsvReader cr = new LinksReader();
+        cr.CsvReader("data\\links.csv");
+        HashMap<String, Links> link = (HashMap<String, Links>) cr.getMap();
 
         if (link.isEmpty()) {
             System.out.println("The HashMap is empty.");
