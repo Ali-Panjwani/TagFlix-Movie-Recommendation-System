@@ -6,15 +6,11 @@ import java.util.HashMap;
 
 
 public interface CsvReader {
-
     void CsvReader(String filepath);
-
 }
 
 class MoviesReader implements CsvReader{
-
     HashMap<String,Movies> MovieMaps = new HashMap<>();
-
     @Override
     public void CsvReader(String filepath) {
 
@@ -40,7 +36,6 @@ class MoviesReader implements CsvReader{
             throw new RuntimeException(e);
         }
     }
-
     public HashMap<String, Movies> getMovieMap() {
         return MovieMaps;
     }
@@ -50,6 +45,7 @@ class LinksReader implements CsvReader{
 
     HashMap<String,Links> LinkMaps = new HashMap<>();
     @Override
+
     public void CsvReader(String filepath) {
         
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
@@ -117,8 +113,37 @@ class RatingsReader implements CsvReader{
 }
 
 class TagsReader implements CsvReader{
+
+    HashMap<String, Tags> TagMap = new HashMap<>();
     @Override
     public void CsvReader(String filepath) {
 
+        try(BufferedReader br = new BufferedReader(new FileReader(filepath))) {
+            String line = "";
+
+            while((line = br.readLine()) != null) {
+                Tags Tag = new Tags();
+                String[] data = line.split(",");
+                if(TagMap.containsKey(data[1])){
+                    Tags TempTag = TagMap.get(data[0]);
+                    TempTag.setTags(data[2]);
+                    TagMap.put(data[1],TempTag);
+                } else {
+                    Tag.setMovieId(data[1]);
+                    Tag.setTags(data[2]);
+                    TagMap.put(data[1],Tag);
+                }
+            }
+
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    public HashMap<String, Tags> getTagMap(){
+        return TagMap;
     }
 }
