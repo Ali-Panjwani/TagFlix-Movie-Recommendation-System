@@ -4,7 +4,7 @@ import java.util.ArrayList;
 public class Ratings {
 
     private String movieId;
-    private int rating;
+    private int rating = 0;
     private int rating_count;
 
     public String getMovieId() {
@@ -22,7 +22,7 @@ public class Ratings {
     public void setRating(int new_rating) {
         rating_count++;
 
-        int prev_rating = rating;
+        int prev_rating = this.rating;
         this.rating = ((rating * (rating_count-1)) + new_rating) / rating_count;
     }
 
