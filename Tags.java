@@ -19,8 +19,8 @@ public class Tags {
         return tags;
     }
 
-    public void setTags(ArrayList<String> tags) {
-        this.tags = tags;
+    public void setTags(String tag_str) {
+        tags.add(tag_str);
     }
 
     public Tags() {
