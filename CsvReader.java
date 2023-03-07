@@ -7,10 +7,11 @@ import java.util.HashMap;
 
 public interface CsvReader {
     void CsvReader(String filepath);
+    public HashMap<String, ? extends Object> getMap();
 }
 
 class MoviesReader implements CsvReader{
-    HashMap<String,Movies> MovieMaps = new HashMap<>();
+    HashMap<String, Movies> MovieMaps = new HashMap<>();
     @Override
     public void CsvReader(String filepath) {
 
@@ -36,16 +37,18 @@ class MoviesReader implements CsvReader{
             throw new RuntimeException(e);
         }
     }
-    public HashMap<String, Movies> getMovieMap() {
+
+    @Override
+    public HashMap<String,Movies> getMap() {
         return MovieMaps;
     }
 }
 
 class LinksReader implements CsvReader{
 
-    HashMap<String,Links> LinkMaps = new HashMap<>();
-    @Override
+    HashMap<String, Links> LinkMaps = new HashMap<>();
 
+    @Override
     public void CsvReader(String filepath) {
         
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
@@ -74,10 +77,10 @@ class LinksReader implements CsvReader{
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
-    public HashMap<String, Links> getLinksMap() {
+    @Override
+    public HashMap<String, Links> getMap() {
         return LinkMaps;
     }
 }
@@ -116,7 +119,8 @@ class RatingsReader implements CsvReader{
 
     }
 
-    public HashMap<String, Ratings> getRatingMap(){
+    @Override
+    public HashMap<String, Ratings> getMap(){
         return RatingMap;
     }
 }
@@ -136,7 +140,7 @@ class TagsReader implements CsvReader{
                 if(TagMap.containsKey(data[1])){
                     Tags TempTag = TagMap.get(data[0]);
                     TempTag.setTags(data[2]);
-                    TagMap.put(data[1],TempTag);
+                    TagMap.put(data[0], TempTag);
                 } else {
                     Tag.setMovieId(data[1]);
                     Tag.setTags(data[2]);
@@ -152,7 +156,8 @@ class TagsReader implements CsvReader{
 
     }
 
-    public HashMap<String, Tags> getTagMap(){
+    @Override
+    public HashMap<String,Tags> getMap(){
         return TagMap;
     }
 }
