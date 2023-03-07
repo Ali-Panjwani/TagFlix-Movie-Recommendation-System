@@ -54,6 +54,11 @@ class LinksReader implements CsvReader{
             while((line = br.readLine()) != null ) {
                 Links Link = new Links();
                 String[] data = line.split(",");
+                if (data.length < 3) {
+                    // Skip lines with less than three fields
+                    continue;
+                }
+
                 if(LinkMaps.containsKey(data[0])) {
                     continue;
                 } else {
@@ -90,12 +95,16 @@ class RatingsReader implements CsvReader{
             while((line = br.readLine()) != null) {
                 Ratings Rating = new Ratings();
                 String[] data = line.split(",");
-                if(RatingMap.containsKey(data[1])){
+                if (data.length < 3) {
+                    // Skip lines with less than three fields
+                    continue;
+                }
+                if (RatingMap.containsKey(data[1])) {
                     continue;
                 } else {
                     Rating.setMovieId(data[1]);
                     Rating.setRating(Integer.parseInt(data[2]));
-                    RatingMap.put(data[1],Rating);
+                    RatingMap.put(data[1], Rating);
                 }
             }
 
