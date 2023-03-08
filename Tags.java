@@ -20,10 +20,10 @@ public class Tags {
     }
 
     public void setTags(String tag_str) {
-        tags.add(tag_str);
+    tags.add(tag_str);
     }
 
     public Tags() {
-
+        tags = new ArrayList<String>();
     }
 }
