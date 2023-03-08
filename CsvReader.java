@@ -17,7 +17,7 @@ class MoviesReader implements CsvReader{
 
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line = "";
-
+            br.readLine();
             while((line = br.readLine()) != null ) {
                 Movies Movie = new Movies();
                 String[] data = line.split(",");
@@ -26,7 +26,7 @@ class MoviesReader implements CsvReader{
                 } else {
                     Movie.setMovieId(data[0]);
                     Movie.setTitle(data[1]);
-                    Movie.setGenre(data[2].split("|"));
+                    Movie.setGenre(data[2].split("\\|"));
                     MovieMaps.put(data[0], Movie);
                 }
             }
@@ -53,7 +53,7 @@ class LinksReader implements CsvReader{
         
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line = "";
-
+            br.readLine();
             while((line = br.readLine()) != null ) {
                 Links Link = new Links();
                 String[] data = line.split(",");
@@ -92,21 +92,24 @@ class RatingsReader implements CsvReader{
     @Override
     public void CsvReader(String filepath) {
 
+
         try(BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line = "";
+            br.readLine();
 
             while((line = br.readLine()) != null) {
                 Ratings Rating = new Ratings();
                 String[] data = line.split(",");
-                if (data.length < 3) {
-                    // Skip lines with less than three fields
-                    continue;
-                }
+
                 if (RatingMap.containsKey(data[1])) {
-                    continue;
+                    Ratings tempRating = RatingMap.get(data[1]);
+                    tempRating.setRating(data[2]);
+                    RatingMap.put(data[1], tempRating);
+
                 } else {
                     Rating.setMovieId(data[1]);
-                    Rating.setRating(Integer.parseInt(data[2]));
+                    Rating.setRating(data[2]);
+
                     RatingMap.put(data[1], Rating);
                 }
             }
@@ -133,18 +136,20 @@ class TagsReader implements CsvReader{
 
         try(BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line = "";
-
+            br.readLine();
             while((line = br.readLine()) != null) {
                 Tags Tag = new Tags();
                 String[] data = line.split(",");
-                if(TagMap.containsKey(data[1])){
-                    Tags TempTag = TagMap.get(data[0]);
-                    TempTag.setTags(data[2]);
-                    TagMap.put(data[0], TempTag);
-                } else {
-                    Tag.setMovieId(data[1]);
-                    Tag.setTags(data[2]);
-                    TagMap.put(data[1],Tag);
+                if(data[2] != null) {
+                    if (TagMap.containsKey(data[1])) {
+                        Tags TempTag = TagMap.get(data[1]);
+                        TempTag.setTags(data[2]);
+                        TagMap.put(data[1], TempTag);
+                    } else {
+                        Tag.setMovieId(data[1]);
+                        Tag.setTags(data[2]);
+                        TagMap.put(data[1], Tag);
+                    }
                 }
             }
 
