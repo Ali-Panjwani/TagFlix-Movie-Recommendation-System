@@ -6,14 +6,14 @@ import java.util.HashMap;
 
 
 public interface CsvReader {
-    void CsvReader(String filepath);
+    void readCsvReader(String filepath);
     public HashMap<String, ? extends Object> getMap();
 }
 
 class MoviesReader implements CsvReader{
-    HashMap<String, Movies> MovieMaps = new HashMap<>();
+    HashMap<String, Movies> movieMap = new HashMap<>();
     @Override
-    public void CsvReader(String filepath) {
+    public void readCsvReader(String filepath) {
 
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line = "";
@@ -21,13 +21,13 @@ class MoviesReader implements CsvReader{
             while((line = br.readLine()) != null ) {
                 Movies Movie = new Movies();
                 String[] data = line.split(",");
-                if(MovieMaps.containsKey(data[0])) {
+                if(movieMap.containsKey(data[0])) {
                     continue;
                 } else {
                     Movie.setMovieId(data[0]);
                     Movie.setTitle(data[1]);
                     Movie.setGenre(data[2].split("\\|"));
-                    MovieMaps.put(data[0], Movie);
+                    movieMap.put(data[0], Movie);
                 }
             }
 
@@ -40,16 +40,16 @@ class MoviesReader implements CsvReader{
 
     @Override
     public HashMap<String,Movies> getMap() {
-        return MovieMaps;
+        return movieMap;
     }
 }
 
 class LinksReader implements CsvReader{
 
-    HashMap<String, Links> LinkMaps = new HashMap<>();
+    HashMap<String, Links> linkMap = new HashMap<>();
 
     @Override
-    public void CsvReader(String filepath) {
+    public void readCsvReader(String filepath) {
         
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line = "";
@@ -62,13 +62,13 @@ class LinksReader implements CsvReader{
                     continue;
                 }
 
-                if(LinkMaps.containsKey(data[0])) {
+                if(linkMap.containsKey(data[0])) {
                     continue;
                 } else {
                     Link.setMovieId(data[0]);
                     Link.setImdbId(data[1]);
                     Link.setTmdbId(data[2]);
-                    LinkMaps.put(data[0], Link);
+                    linkMap.put(data[0], Link);
                 }
             }
 
@@ -81,16 +81,16 @@ class LinksReader implements CsvReader{
 
     @Override
     public HashMap<String, Links> getMap() {
-        return LinkMaps;
+        return linkMap;
     }
 }
 
 class RatingsReader implements CsvReader{
 
-    HashMap<String, Ratings> RatingMap = new HashMap<>();
+    HashMap<String, Ratings> ratingMap = new HashMap<>();
 
     @Override
-    public void CsvReader(String filepath) {
+    public void readCsvReader(String filepath) {
 
 
         try(BufferedReader br = new BufferedReader(new FileReader(filepath))) {
@@ -101,16 +101,16 @@ class RatingsReader implements CsvReader{
                 Ratings Rating = new Ratings();
                 String[] data = line.split(",");
 
-                if (RatingMap.containsKey(data[1])) {
-                    Ratings tempRating = RatingMap.get(data[1]);
+                if (ratingMap.containsKey(data[1])) {
+                    Ratings tempRating = ratingMap.get(data[1]);
                     tempRating.setRating(data[2]);
-                    RatingMap.put(data[1], tempRating);
+                    ratingMap.put(data[1], tempRating);
 
                 } else {
                     Rating.setMovieId(data[1]);
                     Rating.setRating(data[2]);
 
-                    RatingMap.put(data[1], Rating);
+                    ratingMap.put(data[1], Rating);
                 }
             }
 
@@ -124,15 +124,15 @@ class RatingsReader implements CsvReader{
 
     @Override
     public HashMap<String, Ratings> getMap(){
-        return RatingMap;
+        return ratingMap;
     }
 }
 
 class TagsReader implements CsvReader{
 
-    HashMap<String, Tags> TagMap = new HashMap<>();
+    HashMap<String, Tags> tagMap = new HashMap<>();
     @Override
-    public void CsvReader(String filepath) {
+    public void readCsvReader(String filepath) {
 
         try(BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             String line = "";
@@ -141,14 +141,14 @@ class TagsReader implements CsvReader{
                 Tags Tag = new Tags();
                 String[] data = line.split(",");
                 if(data[2] != null) {
-                    if (TagMap.containsKey(data[1])) {
-                        Tags TempTag = TagMap.get(data[1]);
+                    if (tagMap.containsKey(data[1])) {
+                        Tags TempTag = tagMap.get(data[1]);
                         TempTag.setTags(data[2]);
-                        TagMap.put(data[1], TempTag);
+                        tagMap.put(data[1], TempTag);
                     } else {
                         Tag.setMovieId(data[1]);
                         Tag.setTags(data[2]);
-                        TagMap.put(data[1], Tag);
+                        tagMap.put(data[1], Tag);
                     }
                 }
             }
@@ -163,6 +163,6 @@ class TagsReader implements CsvReader{
 
     @Override
     public HashMap<String,Tags> getMap(){
-        return TagMap;
+        return tagMap;
     }
 }
