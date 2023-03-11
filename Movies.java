@@ -38,8 +38,19 @@ public class Movies {
         this.genre = tempGenre;
     }
 
+    public void setGenre(ArrayList<String> genre) {
+        this.genre = genre;
+    }
+
     public Movies() {
 
+    }
+
+    public Movies(String movieId, String title, ArrayList<String> genre){
+
+        setMovieId(movieId);
+        setTitle(title);
+        setGenre(genre);
     }
 
 
