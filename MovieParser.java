@@ -1,33 +1,47 @@
-import java.io.File;
-import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.*;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.*;
-import org.xml.sax.SAXException;
-import java.io.File;
 
 public class MovieParser {
 
-    public MovieParser() {
+    HashMap<String, Links> mpLink = new HashMap<>();
+    HashMap<String, Movies> mpMovie = new HashMap<>();
+    HashMap<String, Ratings> mpRating = new HashMap<>();
+    HashMap<String, Tags> mpTag = new HashMap<>();
 
+    public MovieParser(String folderPath) {
+        
+        CsvReader cr = new LinksReader();
+        cr.readCsvReader(folderPath+"\\links.csv");
+        mpLink = (HashMap<String, Links>) cr.getMap();
+
+        cr = new MoviesReader();
+        cr.readCsvReader(folderPath+"\\movies.csv");
+        mpMovie = (HashMap<String, Movies>) cr.getMap();
+
+        cr = new RatingsReader();
+        cr.readCsvReader(folderPath+"\\ratings.csv");
+        mpRating = (HashMap<String, Ratings>) cr.getMap();
+
+        cr = new TagsReader();
+        cr.readCsvReader(folderPath+"\\tags.csv");
+        mpTag = (HashMap<String, Tags>) cr.getMap();
+    
     }
 
-    public File[] filereader(String folderpath) {
-        try {
-            File folder = new File(folderpath);
-            File[] files = folder.listFiles();
+    public ArrayList<MovieEntry> getMovieObj(){
+        ArrayList<MovieEntry> MovEntList = new ArrayList<MovieEntry>();
+        Set<String> keySet = mpMovie.keySet();
 
-            return files;
-        } catch(SecurityException e) {
-            System.out.println("Security exception occurred: " + e.getMessage());
-        } catch (NullPointerException e) {
-            System.out.println("Folder does not exist or is not a directory.");
+        for(String key : keySet){
+            MovieEntry MovEntObj = new MovieEntry();
+            MovEntObj.meMovie = new Movies(mpMovie.get(key));
+            MovEntObj.meTag = new Tags(mpTag.get(key));
+            MovEntObj.meRating = new Ratings(mpRating.get(key));
+            MovEntObj.meLink = new Links(mpLink.get(key));
+            MovEntList.add(MovEntObj);
         }
-        return null;
-    }
 
+        return MovEntList;
+    }
 }
