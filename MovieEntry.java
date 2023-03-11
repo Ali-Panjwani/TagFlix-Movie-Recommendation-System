@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Set;
 
 public class MovieEntry{
 
@@ -37,6 +38,10 @@ public class MovieEntry{
 
     public Links getLink() {
         return meLink;
+    }
+
+    public void printMovObj(MovieEntry meObj){
+        System.out.println(meObj);
     }
 }
 
