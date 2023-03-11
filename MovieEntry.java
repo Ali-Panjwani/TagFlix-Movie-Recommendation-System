@@ -2,41 +2,41 @@ import java.util.ArrayList;
 
 public class MovieEntry{
 
-    Movies movie = new Movies();
-    Tags tag = new Tags();
-    Ratings rating = new Ratings();
-    Links link = new Links();
+    Movies meMovie = new Movies();
+    Tags meTag = new Tags();
+    Ratings meRating = new Ratings();
+    Links meLink = new Links();
 
     public void setMovie(Movies movie) {
-        this.movie = movie;
+        this.meMovie = movie;
     }
 
     public void setTag(Tags tag) {
-        this.tag = tag;
+        this.meTag = tag;
     }
 
     public void setRating(Ratings rating) {
-        this.rating = rating;
+        this.meRating = rating;
     }
 
     public void setLink(Links link) {
-        this.link = link;
+        this.meLink = link;
     }
 
     public Movies getMovie() {
-        return movie;
+        return meMovie;
     }
 
     public Tags getTag() {
-        return tag;
+        return meTag;
     }
 
     public Ratings getRating() {
-        return rating;
+        return meRating;
     }
 
     public Links getLink() {
-        return link;
+        return meLink;
     }
 }
 
