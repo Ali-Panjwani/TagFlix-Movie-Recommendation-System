@@ -32,7 +32,12 @@ public class Links {
     }
 
     public Links() {
+    }
 
+    public Links(Links lObj){
+        this.movieId = lObj.movieId;
+        this.imdbId = lObj.getMovieId();
+        this.tmdbId = lObj.getTmdbId();
     }
 
 }

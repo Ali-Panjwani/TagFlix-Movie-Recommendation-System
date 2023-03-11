@@ -5,7 +5,7 @@ public class Ratings {
 
     private String movieId;
     private float rating = 0;
-    private float rating_count;
+    private float ratingCount;
 
     public String getMovieId() {
         return movieId;
@@ -19,29 +19,34 @@ public class Ratings {
         return rating;
     }
 
-    public void setRating(String new_rating_str) {
-        float new_rating = 0;
+    public void setRating(String newRatingStr) {
+        float newRating = 0;
         try {
-            if (new_rating_str.contains(".")) {
-                new_rating = Float.parseFloat(new_rating_str);
+            if (newRatingStr.contains(".")) {
+                newRating = Float.parseFloat(newRatingStr);
             } else {
-                new_rating = (float) Integer.parseInt(new_rating_str);
+                newRating = (float) Integer.parseInt(newRatingStr);
             }
         } catch(NumberFormatException e){
-            System.out.println("Issue: "+new_rating_str);
+            System.out.println("Issue: "+newRatingStr);
         }
-        rating_count++;
+        ratingCount++;
 
         float prev_rating = this.rating;
-        this.rating = (((rating * (rating_count-1)) + new_rating) / rating_count);
+        this.rating = (((rating * (ratingCount-1)) + newRating) / ratingCount);
     }
 
 
-    public float getrating_count() {
-        return rating_count;
+    public float GetRatingCount() {
+        return ratingCount;
     }
 
     public Ratings() {
+    }
 
+    public Ratings(Ratings rObj){
+        this.movieId = rObj.getMovieId();
+        this.rating = rObj.getRating();
+        this.ratingCount = rObj.GetRatingCount();;
     }
 }

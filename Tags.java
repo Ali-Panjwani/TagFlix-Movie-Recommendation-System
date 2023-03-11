@@ -3,9 +3,7 @@ import java.util.ArrayList;
 
 public class Tags {
     private String movieId;
-
     private ArrayList<String> tags;
-
 
     public String getMovieId() {
         return movieId;
@@ -25,5 +23,11 @@ public class Tags {
 
     public Tags() {
         tags = new ArrayList<String>();
+    }
+
+    public Tags(Tags tObj){
+        tags = new ArrayList<String>();
+        this.movieId = tObj.getMovieId();
+        this.tags = tObj.getTags();
     }
 }

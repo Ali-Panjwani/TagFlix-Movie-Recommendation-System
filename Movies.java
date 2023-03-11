@@ -46,11 +46,10 @@ public class Movies {
 
     }
 
-    public Movies(String movieId, String title, ArrayList<String> genre){
-
-        setMovieId(movieId);
-        setTitle(title);
-        setGenre(genre);
+    public Movies(Movies mObj){
+        this.movieId = mObj.getMovieId();
+        this.title = mObj.getTitle();
+        this.genre = mObj.getGenre();
     }
 
 
