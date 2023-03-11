@@ -4,7 +4,7 @@ import java.util.Map;
 public class EntryPoint {
     public static void main(String[] args) {
         CsvReader cr = new LinksReader();
-        cr.CsvReader("data\\links.csv");
+        cr.readCsvReader("data\\links.csv");
         HashMap<String, Links> link = (HashMap<String, Links>) cr.getMap();
 
         if (link.isEmpty()) {
@@ -19,7 +19,7 @@ public class EntryPoint {
         }
 
         cr = new MoviesReader();
-        cr.CsvReader("data\\movies.csv");
+        cr.readCsvReader("data\\movies.csv");
         HashMap<String, Movies> movie = (HashMap<String, Movies>) cr.getMap();
 
         if (movie.isEmpty()) {
@@ -34,7 +34,7 @@ public class EntryPoint {
         }
 
         cr = new RatingsReader();
-        cr.CsvReader("data\\ratings.csv");
+        cr.readCsvReader("data\\ratings.csv");
         HashMap<String, Ratings> rating = (HashMap<String, Ratings>) cr.getMap();
 
         if (rating.isEmpty()) {
@@ -49,7 +49,7 @@ public class EntryPoint {
         }
 
         cr = new TagsReader();
-        cr.CsvReader("data\\tags.csv");
+        cr.readCsvReader("data\\tags.csv");
         HashMap<String, Tags> tag = (HashMap<String, Tags>) cr.getMap();
 
         if (tag.isEmpty()) {
