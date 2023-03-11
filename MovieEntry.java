@@ -1,96 +1,47 @@
 import java.util.ArrayList;
+import java.util.Set;
 
-public class MovieEntry implements Comparable<MovieEntry>{
+public class MovieEntry{
 
-    private String movieId;
-    private String title;
-    private ArrayList<String> genre;
-    private int rating;
-    private int rating_count;
-    private ArrayList<String> tags;
-    private String imdbId;
-    private String tmdbId;
+    Movies meMovie = new Movies();
+    Tags meTag = new Tags();
+    Ratings meRating = new Ratings();
+    Links meLink = new Links();
 
-
-    public MovieEntry() {
+    public void setMovie(Movies movie) {
+        this.meMovie = movie;
     }
 
-    public String getMovieId() {
-        return movieId;
+    public void setTag(Tags tag) {
+        this.meTag = tag;
     }
 
-    public void setMovieId(String movieId) {
-        this.movieId = movieId;
+    public void setRating(Ratings rating) {
+        this.meRating = rating;
     }
 
-    public String getTitle() {
-        return title;
+    public void setLink(Links link) {
+        this.meLink = link;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public Movies getMovie() {
+        return meMovie;
     }
 
-    public ArrayList<String> getGenre() {
-        return genre;
+    public Tags getTag() {
+        return meTag;
     }
 
-    public void setGenre(ArrayList<String> genre) {
-        this.genre = genre;
+    public Ratings getRating() {
+        return meRating;
     }
 
-    public int getRating() {
-        return rating;
+    public Links getLink() {
+        return meLink;
     }
 
-    public void setRating(int new_rating) {
-        rating_count++;
-
-        int prev_rating = rating;
-        this.rating = ((rating * (rating_count-1)) + new_rating) / rating_count;
+    public void printMovObj(MovieEntry meObj){
+        System.out.println(meObj);
     }
-
-    public int getrating_count() {
-        return rating_count;
-    }
-
-    public ArrayList<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(ArrayList<String> tags) {
-        this.tags = tags;
-    }
-
-    public String getImdbId() {
-        return imdbId;
-    }
-
-    public void setImdbId(String imdbId) {
-        this.imdbId = imdbId;
-    }
-
-    public String getTmdbId() {
-        return tmdbId;
-    }
-
-    public void setTmdbId(String tmdbId) {
-        this.tmdbId = tmdbId;
-    }
-
-
-
-    @Override
-    public int compareTo(MovieEntry o) {
-
-        if (rating < o.rating) {
-            return -1;
-        } else if (rating == o.rating) {
-            return 0;
-        } else {
-            return 1;
-        }
-    }
-
 }
 
